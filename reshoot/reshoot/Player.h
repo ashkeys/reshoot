@@ -1,3 +1,10 @@
+/**
+ * @brief Playerクラスヘッダー
+ *
+ * プレイヤーが操作するキャラに関するクラス
+ *
+ */
+
 class Player{
 public:
 	Player();
@@ -12,8 +19,10 @@ private:
 	double x, y;
 	double dx, dy;
 	// Vector2D dir;
+	char keyBuf[256];						/// キー入力用のバッファ。配列サイズ256固定。
 
 	int drawX, drawY;
-	int hImage;
+	int hImage;									/// 描画ハンドル
+	int imageSizeX, imageSizeY;
 	double scale;
 };

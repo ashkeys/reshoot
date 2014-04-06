@@ -16,7 +16,7 @@
 
 // 関数プロトタイプ宣言
 void Init();
-void InputKey();
+void Input();
 void Update();
 void Draw();
 
@@ -37,14 +37,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	Init();
 
 	// メインループ
-	while( !ProcessMessage() ){
+	while( !ProcessMessage() && !( CheckHitKey(KEY_INPUT_ESCAPE) ) ){
 		ClearDrawScreen();
 
-		InputKey();
+		Input();
 		Update();
 		Draw();
-
-		
 
 		ScreenFlip();
 	}
@@ -53,33 +51,48 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	return 0;
 }
 
+/**
+ * @brief 全体の初期化
+ *
+ */
 void Init()
 {
-	player = new Player(32, 32, "../data/image/player.png");
+	player = new Player(320, 240, "../data/image/player.png");
 
 	//int hImage = LoadGraph("../data/image/player.png");
 
 	//g_imageList.push_back(hImage);
 }
 
-void InputKey()
+/**
+ * @brief 入力関連
+ *
+ */
+void Input()
 {
 	player->Input();
 }
 
+/**
+ * @brief 更新
+ *
+ */
 void Update()
 {
 	player->Move();
 }
 
+/**
+ * @brief 描画
+ *
+ */
 void Draw()
 {
-	//std::list<int>::iterator it = g_imageList.begin();
 	/*
+	std::list<int>::iterator it = g_imageList.begin();
+	
 	while( it != g_imageList.end() ){
 		DrawGraph(48 + i, 56, *it, true);
-		// 描画の仕方はオブジェクトごとに変わるので、*it->draw() とかにする
-		
 		++it;
 	}
 	*/
