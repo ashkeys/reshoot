@@ -5,3 +5,5 @@ Debug
 /reshoot/reshoot.suo
 /reshoot/reshoot/reshoot.vcxproj.filters
 /reshoot/reshoot/reshoot.vcxproj.user
+ipch
+data
