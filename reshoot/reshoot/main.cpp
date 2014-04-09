@@ -8,10 +8,10 @@
  */
 
 // include
-#include "DxLib.h"
 #include <iostream>
 #include <list>
 
+#include "DxLib.h"
 #include "Player.h"
 
 // 関数プロトタイプ宣言
@@ -20,9 +20,9 @@ void Input();
 void Update();
 void Draw();
 
-Player* player;
+// グローバル変数
+Player* g_player;
 //std::list<int> g_imageList;
-int i = 0;
 
 /**
  * @brief Win32アプリケーションエントリポイント
@@ -57,7 +57,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
  */
 void Init()
 {
-	player = new Player(320, 240, "../data/image/player.png");
+	g_player = new Player(320, 240, "../data/image/player.png");
 
 	//int hImage = LoadGraph("../data/image/player.png");
 
@@ -70,7 +70,7 @@ void Init()
  */
 void Input()
 {
-	player->Input();
+	g_player->Input();
 }
 
 /**
@@ -79,7 +79,7 @@ void Input()
  */
 void Update()
 {
-	player->Move();
+	g_player->Move();
 }
 
 /**
@@ -96,5 +96,12 @@ void Draw()
 		++it;
 	}
 	*/
-	player->Draw();
+	g_player->Draw();
+	
+	//弾丸をプレイヤーと分離してここに記述する
+	/*
+	for(int i = 0; i < P_BULLET_MAX; ++i){
+		bullets[i].Draw();
+	}
+	*/
 }
