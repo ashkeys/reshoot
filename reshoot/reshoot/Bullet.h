@@ -1,3 +1,6 @@
+#ifndef __BULLET_H__
+#define __BULLET_H__
+
 /**
  * @file Bullet.h
  * @brief Bulletクラスヘッダー
@@ -11,16 +14,32 @@ public:
 	Bullet();
 	~Bullet();
 
-	void AliveFlg(bool flg)	{aliveFlg = flg;}		/// setter
-	bool AliveFlg()					{return aliveFlg;}	/// getter
+	void Input();
+	void Update();
+	void Output();
 
-	void Draw();
-	void Fire(double ax, double ay);
+	// 一旦publicで進める
+	void Fire(const double ax, const double ay);
+	void Reset();	
+
+	/*
+	void AliveFlg(const bool flg)	{aliveFlg = flg;}		/// setter
+	bool AliveFlg() const					{return aliveFlg;}	/// getter
+	*/
+private:
+	// Input method
+
+	// Update method
+	//void Fire(double ax, double ay);
 	void Move();
-	void Init();
 	void Collide();
 
-private:
+	// Output method
+	void Draw();
+
+	// Other method
+	//void Reset();
+
 	double x, y;
 	//Vector2D dir;
 
@@ -33,3 +52,5 @@ private:
 	//Collider collider;
 	//衝突判定のサイズ決定用変数が必要。複雑な形のキャラの場合、colliderも複数必要。
 };
+
+#endif

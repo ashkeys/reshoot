@@ -8,6 +8,8 @@
 #include "DxLib.h"
 #include "Bullet.h"
 
+/* ______________________________________________________________________________________public method */
+
 /**
  * @brief ƒRƒ“ƒXƒgƒ‰ƒNƒ^
  *
@@ -28,27 +30,37 @@ Bullet::~Bullet()
 }
 
 /**
- * @brief ’eŠÛ‚Ì•`‰æ
+ * @brief “ü—Í
  *
  */
-void Bullet::Draw()
+void Bullet::Input()
 {
-	if(aliveFlg == true){
-		drawX = static_cast<int>( x - (imageSizeX / 2) );
-		drawY = static_cast<int>( y - (imageSizeY / 2) );
-		DrawGraph(drawX, drawY, hImage, true);
-	}
 }
 
 /**
- * @brief ’eŠÛ”­Ë
+ * @brief XV
  *
  */
-void Bullet::Fire(double ax, double ay)
+void Bullet::Update()
 {
-	x = ax;
-	y = ay;
+	Move();
+	Collide();
 }
+
+/**
+ * @brief o—Í
+ *
+ */
+void Bullet::Output()
+{
+	Draw();
+}
+
+/* ______________________________________________________________________________________private method */
+
+/* ______________________________________________________________________Input method */
+
+/* ______________________________________________________________________Update method */
 
 /**
  * @brief ’eŠÛ‚ÌˆÚ“®
@@ -62,16 +74,6 @@ void Bullet::Move()
 }
 
 /**
- * @brief ’eŠÛ‚Ì‰Šú‰»
- *
- */
-void Bullet::Init()
-{
-	aliveFlg = false;
-	x = 0;
-}
-
-/**
  * @brief ’eŠÛ‚ÌÕ“Ë”»’è
  *
  */
@@ -80,4 +82,44 @@ void Bullet::Collide()
 	if(aliveFlg == true){
 	
 	}
+}
+
+/* ______________________________________________________________________Output method */
+
+/**
+ * @brief ’eŠÛ‚Ì•`‰æ
+ *
+ */
+void Bullet::Draw()
+{
+	if(aliveFlg == true){
+		drawX = static_cast<int>( x - (imageSizeX / 2) );
+		drawY = static_cast<int>( y - (imageSizeY / 2) );
+		DrawGraph(drawX, drawY, hImage, true);
+	}
+}
+
+/* ______________________________________________________________________Other method */
+
+/**
+ * @brief ’eŠÛ”­Ë
+ * @param [in] ax ”­Ë‚ÌxÀ•W
+ * @param [in] ay ”­Ë‚ÌyÀ•W
+ *
+ */
+void Bullet::Fire(const double ax, const double ay)
+{
+	aliveFlg = true;
+	x = ax;
+	y = ay;
+}
+
+/**
+ * @brief ’eŠÛ‚Ì‰Šú‰»
+ *
+ */
+void Bullet::Reset()
+{
+	aliveFlg = false;
+	x = 0;
 }

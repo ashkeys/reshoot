@@ -1,3 +1,6 @@
+#ifndef __COMMON_H__
+#define __COMMON_H__
+
 /**
  * @file common.h
  * @brief 共通定義ファイル
@@ -7,5 +10,10 @@
  *
  */
 
+// include
+#include "Bullet.h"
+
 // プレイヤーの弾数MAX
 #define P_BULLET_MAX 32
+
+#endif
