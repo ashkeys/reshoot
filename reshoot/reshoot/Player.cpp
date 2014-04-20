@@ -63,12 +63,14 @@ void Player::Update()
 }
 
 /**
- * @brief 出力
+ * @brief 描画
  *
  */
-void Player::Output()
+void Player::Draw()
 {
-	Draw();
+	drawX = static_cast<int>( x - (imageSizeX / 2) );
+	drawY = static_cast<int>( y - (imageSizeY / 2) );
+	DrawGraph(drawX, drawY, hImage, true);
 }
 
 /* ______________________________________________________________________________________private method */
@@ -119,7 +121,7 @@ void Player::CheckKey(const int buf)
 /* ______________________________________________________________________Update method */
 
 /**
- * @brief プレイヤーの移動
+ * @brief 移動
  *
  */
 void Player::Move()
@@ -136,30 +138,17 @@ void Player::Move()
 }
 
 /**
- * @brief プレイヤーの衝突判定（使い道未定）
+ * @brief 衝突判定（使い道未定）
  *
  */
 void Player::Collide()
 {
 }
 
-/* ______________________________________________________________________Output method */
-
-/**
- * @brief プレイヤーの描画
- *
- */
-void Player::Draw()
-{
-	drawX = static_cast<int>( x - (imageSizeX / 2) );
-	drawY = static_cast<int>( y - (imageSizeY / 2) );
-	DrawGraph(drawX, drawY, hImage, true);
-}
-
 /* ______________________________________________________________________Other method */
 
 /**
- * @brief プレイヤーの状態リセット
+ * @brief 状態リセット
  *
  */
 void Player::Reset()

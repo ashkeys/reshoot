@@ -19,7 +19,7 @@ public:
 
 	void Input();
 	void Update();
-	void Output();
+	void Draw();
 
 	// ˆê’Upublic‚Åi‚ß‚é
 	void Fire(const double ax, const double ay);
@@ -30,15 +30,10 @@ public:
 	bool AliveFlg() const					{return aliveFlg;}	/// getter
 	*/
 private:
-	// Input method
-
 	// Update method
 	//void Fire(double ax, double ay);
 	void Move();
 	void Collide();
-
-	// Output method
-	void Draw();
 
 	// Other method
 	//void Reset();

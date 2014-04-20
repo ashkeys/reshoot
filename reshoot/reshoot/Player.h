@@ -23,7 +23,7 @@ public:
 
 	void Input(const int buf);
 	void Update();
-	void Output();
+	void Draw();
 
 	void X(const double ax) {x = ax;}		/// setter
 	double X() const				{return x;}	/// getter
@@ -37,9 +37,6 @@ private:
 	// Update method
 	void Move();
 	void Collide();
-
-	// Output method
-	void Draw();
 
 	// Other method
 	void Reset();

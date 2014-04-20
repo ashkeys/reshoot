@@ -48,46 +48,7 @@ void Bullet::Update()
 }
 
 /**
- * @brief o—Í
- *
- */
-void Bullet::Output()
-{
-	Draw();
-}
-
-/* ______________________________________________________________________________________private method */
-
-/* ______________________________________________________________________Input method */
-
-/* ______________________________________________________________________Update method */
-
-/**
- * @brief ’eŠÛ‚ÌˆÚ“®
- *
- */
-void Bullet::Move()
-{
-	if(aliveFlg == true){
-		x += 10;
-	}
-}
-
-/**
- * @brief ’eŠÛ‚ÌÕ“Ë”»’è
- *
- */
-void Bullet::Collide()
-{
-	if(aliveFlg == true){
-	
-	}
-}
-
-/* ______________________________________________________________________Output method */
-
-/**
- * @brief ’eŠÛ‚Ì•`‰æ
+ * @brief •`‰æ
  *
  */
 void Bullet::Draw()
@@ -99,10 +60,36 @@ void Bullet::Draw()
 	}
 }
 
+/* ______________________________________________________________________________________private method */
+
+/* ______________________________________________________________________Update method */
+
+/**
+ * @brief ˆÚ“®
+ *
+ */
+void Bullet::Move()
+{
+	if(aliveFlg == true){
+		x += 10;
+	}
+}
+
+/**
+ * @brief Õ“Ë”»’è
+ *
+ */
+void Bullet::Collide()
+{
+	if(aliveFlg == true){
+	
+	}
+}
+
 /* ______________________________________________________________________Other method */
 
 /**
- * @brief ’eŠÛ”­Ë
+ * @brief ”­Ë
  * @param [in] ax ”­Ë‚ÌxÀ•W
  * @param [in] ay ”­Ë‚ÌyÀ•W
  *
@@ -115,7 +102,7 @@ void Bullet::Fire(const double ax, const double ay)
 }
 
 /**
- * @brief ’eŠÛ‚Ì‰Šú‰»
+ * @brief ó‘ÔƒŠƒZƒbƒg
  *
  */
 void Bullet::Reset()

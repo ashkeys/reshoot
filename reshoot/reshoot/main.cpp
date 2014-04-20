@@ -131,10 +131,10 @@ void Draw()
 	/* オブジェクトの描画 */
 	drawMgr->Draw();
 
-	//g_player->Output();					// Draw()の中でOutput()が呼ばれているのはおかしいので、要修正
-
+	// デバッグ用に残しておく
+	//g_player->Draw();
 	//for(int i = 0; i < P_BULLET_MAX; ++i){
-	//	g_pBullets[i].Output();		// Draw()の中でOutput()が呼ばれているのはおかしいので、要修正
+	//	g_pBullets[i].Draw();
 	//}
 }
 
