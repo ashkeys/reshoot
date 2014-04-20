@@ -8,14 +8,38 @@
 #include "DrawMgr.h"
 #include "DrawObj.h"
 
+DrawMgr* DrawMgr::instance = NULL;
+
 /* ______________________________________________________________________________________public method */
 
 /**
- * @brief コンストラクタ
+ * @brief インスタンスを返す
  *
  */
-DrawMgr::DrawMgr()
+DrawMgr* DrawMgr::Instance()
 {
+	return instance;
+}
+
+/**
+ * @brief インスタンスの生成
+ *
+ */
+void DrawMgr::Create()
+{
+	if(!instance){
+		instance = new DrawMgr();
+	}
+}
+
+/**
+ * @brief インスタンスの破棄
+ *
+ */
+void DrawMgr::Destroy()
+{
+	delete instance;
+	instance = NULL;
 }
 
 /**
@@ -43,4 +67,32 @@ void DrawMgr::Draw()
 void DrawMgr::Regist(DrawObj* obj)
 {
 	drawList.push_back(obj);
+}
+
+/* ______________________________________________________________________________________private method */
+
+/**
+ * @brief コンストラクタ
+ *
+ */
+DrawMgr::DrawMgr()
+{
+}
+
+/**
+ * @brief コピーコンストラクタ
+ *
+ * @param [in] cpy コピーの参照
+ *
+ */
+DrawMgr::DrawMgr(const DrawMgr& cpy)
+{
+}
+
+/**
+ * @brief デストラクタ
+ *
+ */
+DrawMgr::~DrawMgr()
+{
 }
