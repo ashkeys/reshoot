@@ -10,9 +10,12 @@
  */
 
 // include
-#include "Bullet.h"
+#include "DrawObj.h"
 
-class Player{
+// ‘O•ûéŒ¾
+class Bullet;
+
+class Player : public DrawObj{
 public:
 	Player();
 	Player(double x, double y, char* fileName, Bullet* bullets);

@@ -9,7 +9,10 @@
  *
  */
 
-class Bullet{
+// include
+#include "DrawObj.h"
+
+class Bullet : public DrawObj{
 public:
 	Bullet();
 	~Bullet();

@@ -13,6 +13,7 @@
 
 #include "DxLib.h"
 #include "common.h"
+#include "DrawMgr.h"
 #include "Player.h"
 
 // 関数プロトタイプ宣言
@@ -28,9 +29,9 @@ void PlaySound();
 // グローバル変数
 
 /* @note DxLib_Init()実行前に描画オブジェクトなどを作らないこと */
+static DrawMgr* drawMgr;
 static Player* g_player;
 static Bullet* g_pBullets;
-//std::list<int> g_imageList;
 
 /**
  * @brief Win32アプリケーションエントリポイント
@@ -70,6 +71,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
  */
 void Init()
 {
+	drawMgr = new DrawMgr();
+	DrawObj::SetDrawMgr(drawMgr);
+
 	// 配列newは初期化できないので、コンストラクタでなくInit()などを作った方がよさそう
 	g_pBullets = new Bullet[P_BULLET_MAX];
 	
@@ -124,21 +128,14 @@ void Draw()
 	// @sa http://marupeke296.com/OOD_No6_CS2_ShootBullet2.html
 	//     描画の仕組みを上記URLを参考に作りかえる
 
-	/*
-	std::list<int>::iterator it = g_imageList.begin();
-	
-	while( it != g_imageList.end() ){
-		DrawGraph(48 + i, 56, *it, true);
-		++it;
-	}
-	*/
-
 	/* オブジェクトの描画 */
-	g_player->Output();					// Draw()の中でOutput()が呼ばれているのはおかしいので、要修正
+	drawMgr->Draw();
 
-	for(int i = 0; i < P_BULLET_MAX; ++i){
-		g_pBullets[i].Output();		// Draw()の中でOutput()が呼ばれているのはおかしいので、要修正
-	}
+	//g_player->Output();					// Draw()の中でOutput()が呼ばれているのはおかしいので、要修正
+
+	//for(int i = 0; i < P_BULLET_MAX; ++i){
+	//	g_pBullets[i].Output();		// Draw()の中でOutput()が呼ばれているのはおかしいので、要修正
+	//}
 }
 
 /**
