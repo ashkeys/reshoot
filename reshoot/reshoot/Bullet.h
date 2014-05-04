@@ -5,8 +5,6 @@
  * @file Bullet.h
  * @brief Bulletクラスヘッダー
  *
- * Playerが発射する弾丸に関するクラス
- *
  */
 
 // include

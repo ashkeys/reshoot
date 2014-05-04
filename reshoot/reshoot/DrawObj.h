@@ -24,7 +24,10 @@ protected:
 	DrawObj();
 
 private:
-	//static DrawMgr* s_drawMgr;
+	int drawX, drawY;						/// 描画用座標
+	int hImage;									/// 描画ハンドル
+	int imageSizeX, imageSizeY;
+	double scale;
 
 };
 

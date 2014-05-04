@@ -27,7 +27,7 @@ public:
 	static void Create();
 	static void Destroy();
 
-	void Regist(DrawObj* obj);
+	void Register(DrawObj* obj);
 
 protected:
 	std::list<DrawObj*> drawList;

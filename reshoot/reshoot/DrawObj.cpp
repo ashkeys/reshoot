@@ -30,7 +30,7 @@ void DrawObj::SetDrawMgr(DrawMgr* mgr)
 DrawObj::DrawObj()
 {
 	if(s_drawMgr){
-		s_drawMgr->Regist(this);
+		s_drawMgr->Register(this);
 	}
 }
 

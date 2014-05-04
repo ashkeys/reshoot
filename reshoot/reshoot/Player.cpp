@@ -8,6 +8,7 @@
 #include "DxLib.h"
 #include "common.h"
 #include "Player.h"
+#include "Bullet.h"
 
 /* ______________________________________________________________________________________public method */
 
@@ -42,6 +43,13 @@ Player::Player(double x, double y, char* fileName, Bullet* bullets) : x(x), y(y)
 Player::~Player()
 {
 }
+
+/*
+void Player::Init(double x, double y, char* fileName, Bullet* bullets, int id)
+{
+
+}
+*/
 
 /**
  * @brief “ü—Í

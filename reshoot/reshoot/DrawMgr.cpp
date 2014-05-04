@@ -64,7 +64,7 @@ void DrawMgr::Draw()
  * @param [in] obj 登録するオブジェクト
  *
  */
-void DrawMgr::Regist(DrawObj* obj)
+void DrawMgr::Register(DrawObj* obj)
 {
 	drawList.push_back(obj);
 }

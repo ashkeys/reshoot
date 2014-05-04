@@ -15,6 +15,7 @@
 #include "common.h"
 #include "DrawMgr.h"
 #include "Player.h"
+#include "Bullet.h"
 
 // 関数プロトタイプ宣言
 void Init();
@@ -29,7 +30,7 @@ void PlaySound();
 // グローバル変数
 
 /* @note DxLib_Init()実行前に描画オブジェクトなどを作らないこと（ポインタはOK） */
-static DrawMgr* drawMgr;
+static DrawMgr* g_drawMgr;
 static Player* g_player;
 static Bullet* g_pBullets;
 
@@ -73,10 +74,9 @@ void Init()
 {
 	// 描画管理クラスの使用準備
 	DrawMgr::Create();
-	drawMgr = DrawMgr::Instance();
-	DrawObj::SetDrawMgr(drawMgr);
+	g_drawMgr = DrawMgr::Instance();
+	DrawObj::SetDrawMgr(g_drawMgr);
 
-	// 配列newは初期化できないので、コンストラクタでなくInit()などを作った方がよさそう
 	g_pBullets = new Bullet[P_BULLET_MAX];
 	
 	g_player = new Player(320, 240, "../data/image/player.png", g_pBullets);
@@ -127,7 +127,7 @@ void Output()
 void Draw()
 {
 	/* オブジェクトの描画 */
-	drawMgr->Draw();
+	g_drawMgr->Draw();
 
 	// デバッグ用に残しておく
 	//g_player->Draw();

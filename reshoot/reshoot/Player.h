@@ -5,8 +5,6 @@
  * @file Player.h
  * @brief Playerクラスヘッダー
  *
- * プレイヤーが操作するキャラに関するクラス
- *
  */
 
 // include
@@ -21,6 +19,7 @@ public:
 	Player(double x, double y, char* fileName, Bullet* bullets);
 	~Player();
 
+	//void Init(int id);
 	void Input(const int buf);
 	void Update();
 	void Draw();
