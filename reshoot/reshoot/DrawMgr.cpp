@@ -66,7 +66,14 @@ void DrawMgr::Draw()
  */
 void DrawMgr::Register(DrawObj* obj)
 {
+	//list::insert‚ğg‚Á‚ÄdrawType‡‚ÉŠi”[
 	drawList.push_back(obj);
+}
+
+void DrawMgr::Replace(int id, DrawType type)
+{
+	//list::erase, insert‚ğg‚Á‚ÄdrawType‡‚ÉŠi”[
+
 }
 
 /* ______________________________________________________________________________________private method */

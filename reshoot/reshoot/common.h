@@ -20,22 +20,22 @@
  *
  */
 enum DrawType{
-	farView = 0,		/// 遠景
-	farFX,					/// 遠景エフェクト
-	middleView,			/// 中景
-	middleFX,				/// 中景エフェクト
-	farChara,				/// 遠キャラ
-	farCharaObj,		/// 遠キャラ付随オブジェクト
-	farCharaFX,			/// 遠キャラ付随エフェクト
-	middleChara,		/// 中キャラ
-	middleCharaObj,	/// 中キャラ付随オブジェクト
-	middleCharaFX,	/// 中キャラ付随エフェクト
-	nearChara,			/// 近キャラ
-	nearCharaObj,		/// 近キャラ付随オブジェクト
-	nearCharaFX,		/// 近キャラ付随エフェクト
-	grossFX,				/// 全体エフェクト
-	systemView,			/// システム画面
-	popup,					/// ポップアップ
+	farView = 0,		///< 遠景
+	farFX,					///< 遠景エフェクト
+	middleView,			///< 中景
+	middleFX,				///< 中景エフェクト
+	farChara,				///< 遠キャラ
+	farCharaObj,		///< 遠キャラ付随オブジェクト
+	farCharaFX,			///< 遠キャラ付随エフェクト
+	middleChara,		///< 中キャラ
+	middleCharaObj,	///< 中キャラ付随オブジェクト
+	middleCharaFX,	///< 中キャラ付随エフェクト
+	nearChara,			///< 近キャラ
+	nearCharaObj,		///< 近キャラ付随オブジェクト
+	nearCharaFX,		///< 近キャラ付随エフェクト
+	grossFX,				///< 全体エフェクト
+	systemView,			///< システム画面
+	popup,					///< ポップアップ
 };
 
 #endif

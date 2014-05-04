@@ -10,6 +10,10 @@
 // include
 #include "DrawObj.h"
 
+/**
+ * @brief BulletƒNƒ‰ƒX
+ *
+ */
 class Bullet : public DrawObj{
 public:
 	Bullet();
@@ -20,12 +24,12 @@ public:
 	void Draw();
 
 	// ˆê’Upublic‚Åi‚ß‚é
-	void Fire(const double ax, const double ay);
+	void Fire(const double x, const double y);
 	void Reset();	
 
 	/*
-	void AliveFlg(const bool flg)	{aliveFlg = flg;}		/// setter
-	bool AliveFlg() const					{return aliveFlg;}	/// getter
+	void AliveFlg(const bool flg)	{aliveFlg = flg;}		///< setter
+	bool AliveFlg() const					{return aliveFlg;}	///< getter
 	*/
 private:
 	// Update method

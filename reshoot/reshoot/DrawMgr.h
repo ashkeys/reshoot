@@ -5,9 +5,6 @@
  * @file DrawMgr.h
  * @brief DrawMgrクラスヘッダー
  *
- * 描画管理クラス
- * シングルトン
- *
  * @sa DrawObj.h
  * @sa http://marupeke296.com/OOD_No6_CS2_ShootBullet2.html
  */
@@ -17,7 +14,15 @@
 
 // 前方宣言
 class DrawObj;
+enum DrawType;
 
+/**
+ * @brief DrawMgrクラス
+ *
+ * 描画管理クラス
+ * シングルトン
+ *
+ */
 class DrawMgr
 {
 public:
@@ -28,6 +33,7 @@ public:
 	static void Destroy();
 
 	void Register(DrawObj* obj);
+	void Replace(int id, DrawType type);
 
 protected:
 	std::list<DrawObj*> drawList;

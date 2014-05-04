@@ -2,7 +2,8 @@
  * @file main.cpp
  * @brief WinMain
  *
- * 2D横スクロールシューティングゲーム「reshoot」（仮）
+ * 2D横スクロールシューティングゲーム「reshoot」
+ * DxLib, 左手系y-up
  * 
  * @author ashkeys
  */
@@ -61,6 +62,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	g_player = NULL;
 	delete [] g_pBullets;
 	g_pBullets = NULL;
+	DrawMgr::Destroy();
 
 	DxLib_End();
 	return 0;
@@ -78,9 +80,10 @@ void Init()
 	DrawObj::SetDrawMgr(g_drawMgr);
 
 	g_pBullets = new Bullet[P_BULLET_MAX];
-	
-	g_player = new Player(320, 240, "../data/image/player.png", g_pBullets);
+	//g_pWeapon = new Weapon[P_WEAPON_NUM];
+	g_player = new Player();
 
+	g_player->Init(0, 320, 240, "../data/image/player.png", g_pBullets);
 }
 
 /**
@@ -89,7 +92,7 @@ void Init()
  */
 void Input()
 {
-	// キーボードとPadの入力が、28bit分padBufに格納される
+	// キーボードとPadの入力が、padBufに格納される
 	int padBuf = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
 	g_player->Input(padBuf);

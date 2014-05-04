@@ -9,25 +9,34 @@
 
 // include
 #include "DrawObj.h"
+#include "Character.h"
 
 // 前方宣言
 class Bullet;
 
-class Player : public DrawObj{
+/**
+ * @brief Playerクラス
+ *
+ * 操作するキャラクターに関するクラス
+ *
+ */
+class Player : public Character{
+	typedef Character Base;	///< 基底クラスをtypedef
+
 public:
 	Player();
 	Player(double x, double y, char* fileName, Bullet* bullets);
 	~Player();
 
-	//void Init(int id);
+	void Init(const int id, const double x, const double y, char* fileName, Bullet* bullets);
 	void Input(const int buf);
 	void Update();
 	void Draw();
 
-	void X(const double ax) {x = ax;}		/// setter
-	double X() const				{return x;}	/// getter
-	void Y(const double ay)	{y = ay;}		/// setter
-	double Y() const				{return y;}	/// getter
+	void X(const double x)	{this->x = x;}		///< setter
+	double X() const				{return this->x;}	///< getter
+	void Y(const double y)	{this->y = y;}		///< setter
+	double Y() const				{return this->y;}	///< getter
 
 private:
 	// Input method

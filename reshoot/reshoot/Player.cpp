@@ -10,14 +10,15 @@
 #include "Player.h"
 #include "Bullet.h"
 
+static DrawType s_drawType = middleChara;
+
 /* ______________________________________________________________________________________public method */
 
 /**
  * @brief コンストラクタ
  *
  */
-Player::Player() : x(0), y(0), dx(0), dy(0),
-	hImage(-1), imageSizeX(32), imageSizeY(32), scale(1.0), bulletIndex(0)
+Player::Player()
 {
 }
 
@@ -30,10 +31,8 @@ Player::Player() : x(0), y(0), dx(0), dy(0),
  * @param [in] bullets	プレイヤーの所持する弾丸
  *
  */
-Player::Player(double x, double y, char* fileName, Bullet* bullets) : x(x), y(y), dx(0), dy(0), scale(1.0), myBullets(bullets), bulletIndex(0)
+Player::Player(double x, double y, char* fileName, Bullet* bullets)
 {
-	hImage = LoadGraph(fileName);
-	GetGraphSize(hImage, &imageSizeX, &imageSizeY);
 }
 
 /**
@@ -44,15 +43,27 @@ Player::~Player()
 {
 }
 
-/*
-void Player::Init(double x, double y, char* fileName, Bullet* bullets, int id)
+/**
+ * @brief 初期化
+ *
+ * @param [in] id 識別番号
+ * @param [in] x 初期x座標
+ * @param [in] y 初期y座標
+ * @param [in] fileName 画像ファイル名
+ * @param [in] bullets 所持する弾丸
+ *
+ */
+void Player::Init(const int id, const double x, const double y, char* const fileName, Bullet* bullets)
 {
+	Base::Init(id, x, y, fileName, s_drawType);
 
+	myBullets = bullets;
+	bulletIndex = 0;
 }
-*/
 
 /**
  * @brief 入力
+ *
  * @param [in] buf 入力情報バッファ
  *
  */
@@ -68,6 +79,8 @@ void Player::Input(const int buf)
 void Player::Update()
 {
 	Move();
+	// SendParent(); のような関数で親にUpdate後の必要な情報を送る
+	// x, yなどはprotectedで継承しているので、直接書き換えてもいいかも？
 }
 
 /**
@@ -86,6 +99,7 @@ void Player::Draw()
 /* ______________________________________________________________________Input method */
 /**
  * @brief キー入力の確認
+ *
  * @param [in] buf 入力情報バッファ
  *
  */

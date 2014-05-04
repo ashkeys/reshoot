@@ -90,15 +90,15 @@ void Bullet::Collide()
 
 /**
  * @brief 発射
- * @param [in] ax 発射時のx座標
- * @param [in] ay 発射時のy座標
+ * @param [in] x 発射時のx座標
+ * @param [in] y 発射時のy座標
  *
  */
-void Bullet::Fire(const double ax, const double ay)
+void Bullet::Fire(const double x, const double y)
 {
 	aliveFlg = true;
-	x = ax;
-	y = ay;
+	this->x = x;
+	this->y = y;
 }
 
 /**
