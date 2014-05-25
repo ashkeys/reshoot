@@ -79,8 +79,6 @@ void DrawMgr::Register(DrawObj* obj)
 	}
 
 	drawList.insert(it, obj);
-
-	//drawList.push_back(obj);
 }
 
 /**
@@ -90,19 +88,6 @@ void DrawMgr::Register(DrawObj* obj)
  */
 void DrawMgr::Unregister(DrawObj* obj)
 {
-	//std::list<DrawObj*>::iterator it = drawList.begin();
-
-	//while( it != drawList.end() ){
-	//	if(*it){
-	//		if( obj->Id() == (*it)->Id() ){
-	//			drawList.erase(it);
-	//			break;
-	//		}
-	//	}
-
-	//	++it;
-	//}
-
 	drawList.remove(obj);
 }
 
@@ -114,12 +99,8 @@ void DrawMgr::Unregister(DrawObj* obj)
  */
 void DrawMgr::ChangeDrawType(DrawObj* obj, DrawType type)
 {
-	if(obj->GetDrawType() != type){
-		Unregister(obj);
-
-		obj->SetDrawType(type);
-		Register(obj);
-	}
+	Unregister(obj);
+	Register(obj);
 }
 
 /* ______________________________________________________________________________________private method */

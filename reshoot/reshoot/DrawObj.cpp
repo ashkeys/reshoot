@@ -32,7 +32,10 @@ void DrawObj::SetDrawMgr(DrawMgr* mgr)
  */
 void DrawObj::SetDrawType(const DrawType type)
 {
-	s_drawMgr->ChangeDrawType(this, type);
+	if(drawType != type){
+		drawType = type;
+		s_drawMgr->ChangeDrawType(this, type);
+	}
 }
 
 /* ______________________________________________________________________________________protected method */

@@ -104,7 +104,6 @@ void Input()
 	for(int i = 0; i < P_BULLET_MAX; ++i){
 		g_pBullets[i].Input();
 	}
-
 }
 
 /**
