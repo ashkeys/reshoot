@@ -66,19 +66,44 @@ void DrawMgr::Draw()
  */
 void DrawMgr::Register(DrawObj* obj)
 {
-	//list::insertを使ってdrawType順に格納
-	drawList.push_back(obj);
+	std::list<DrawObj*>::iterator it = drawList.begin();
+
+	while( it != drawList.end() ){
+		if(*it){
+			if( obj->GetDrawType() < (*it)->GetDrawType() ){
+				break;
+			}
+		}
+
+		++it;
+	}
+
+	drawList.insert(it, obj);
+
+	//drawList.push_back(obj);
 }
 
 /**
  * @brief 描画リストから登録解除
- * @param [in] id 登録解除するオブジェクトのid
+ * @param [in] obj 登録解除するオブジェクト
  *
  */
-void DrawMgr::Unregister(int id)
+void DrawMgr::Unregister(DrawObj* obj)
 {
-	//イテレータ回して、if文でidが一致したらlist::erase
+	//std::list<DrawObj*>::iterator it = drawList.begin();
 
+	//while( it != drawList.end() ){
+	//	if(*it){
+	//		if( obj->Id() == (*it)->Id() ){
+	//			drawList.erase(it);
+	//			break;
+	//		}
+	//	}
+
+	//	++it;
+	//}
+
+	drawList.remove(obj);
 }
 
 /**
@@ -87,10 +112,14 @@ void DrawMgr::Unregister(int id)
  * @param [in: type 変更後の描画タイプ
  *
  */
-void DrawMgr::ChangeType(int id, DrawType type)
+void DrawMgr::ChangeDrawType(DrawObj* obj, DrawType type)
 {
-	//list::erase, insertを使ってdrawType順に格納
+	if(obj->GetDrawType() != type){
+		Unregister(obj);
 
+		obj->SetDrawType(type);
+		Register(obj);
+	}
 }
 
 /* ______________________________________________________________________________________private method */

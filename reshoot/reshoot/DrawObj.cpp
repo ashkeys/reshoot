@@ -24,6 +24,17 @@ void DrawObj::SetDrawMgr(DrawMgr* mgr)
 	s_drawMgr = mgr;
 }
 
+/**
+ * @brief 描画タイプを変更する
+ *
+ * @param [in] type 描画タイプ
+ *
+ */
+void DrawObj::SetDrawType(const DrawType type)
+{
+	s_drawMgr->ChangeDrawType(this, type);
+}
+
 /* ______________________________________________________________________________________protected method */
 
 /**
@@ -72,14 +83,4 @@ void DrawObj::Init(const double x, const double y, const char* fileName, DrawTyp
 	this->x = x;
 	this->y = y;
 	activeFlg = true;
-}
-
-/**
- * @brief DrawTypeを変更する
- *
- */
-void DrawObj::setDrawType(DrawType type)
-{
-	drawType = type;
-	s_drawMgr->ChangeType(id, type);
 }

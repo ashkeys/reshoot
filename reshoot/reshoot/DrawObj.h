@@ -21,14 +21,17 @@ enum DrawType;
 class DrawObj
 {
 public:
+	static void SetDrawMgr(DrawMgr* mgr);
+	
 	void Draw();
 
-	static void SetDrawMgr(DrawMgr* mgr);
+	int Id() const {return this->id;}	///< getter
+	void SetDrawType(const DrawType type);									///< setter + ƒ¿
+	DrawType GetDrawType() const	{return this->drawType;}	///< getter
 
 protected:
 	DrawObj();
 	void Init(const double x, const double y, const char* fileName, DrawType type);
-	void setDrawType(DrawType type);
 
 	void X(const double x)	{this->x = x;}		///< setter
 	double X() const				{return this->x;}	///< getter
