@@ -15,39 +15,30 @@
  *
  */
 class Bullet : public DrawObj{
+	typedef DrawObj Base;	///< 基底クラスをtypedef
+
 public:
 	Bullet();
 	~Bullet();
 
+	void Init(const double x, const double y, const char* fileName);
 	void Input();
 	void Update();
-	void Draw();
 
 	// 一旦publicで進める
 	void Fire(const double x, const double y);
 	void Reset();	
 
-	/*
-	void AliveFlg(const bool flg)	{aliveFlg = flg;}		///< setter
-	bool AliveFlg() const					{return aliveFlg;}	///< getter
-	*/
 private:
 	// Update method
-	//void Fire(double ax, double ay);
 	void Move();
 	void Collide();
+	void SendDataToParent();
 
-	// Other method
-	//void Reset();
-
+	static DrawType s_drawType;
 	double x, y;
 	//Vector2D dir;
-
-	bool aliveFlg;		/// 発射～着弾の間にtrue
-	
-	int drawX, drawY;		/// 描画用座標
-	int hImage;					/// 描画ハンドル
-	int imageSizeX, imageSizeY;
+	bool activeFlg;		/// 発射～着弾の間にtrue
 
 	//Collider collider;
 	//衝突判定のサイズ決定用変数が必要。複雑な形のキャラの場合、colliderも複数必要。

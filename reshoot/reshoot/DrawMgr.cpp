@@ -70,7 +70,24 @@ void DrawMgr::Register(DrawObj* obj)
 	drawList.push_back(obj);
 }
 
-void DrawMgr::Replace(int id, DrawType type)
+/**
+ * @brief 描画リストから登録解除
+ * @param [in] id 登録解除するオブジェクトのid
+ *
+ */
+void DrawMgr::Unregister(int id)
+{
+	//イテレータ回して、if文でidが一致したらlist::erase
+
+}
+
+/**
+ * @brief 描画タイプの変更
+ * @param [in] id 変更するオブジェクトのid
+ * @param [in: type 変更後の描画タイプ
+ *
+ */
+void DrawMgr::ChangeType(int id, DrawType type)
 {
 	//list::erase, insertを使ってdrawType順に格納
 

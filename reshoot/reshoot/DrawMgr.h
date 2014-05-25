@@ -33,7 +33,8 @@ public:
 	static void Destroy();
 
 	void Register(DrawObj* obj);
-	void Replace(int id, DrawType type);
+	void Unregister(int id);
+	void ChangeType(int id, DrawType type);
 
 protected:
 	std::list<DrawObj*> drawList;

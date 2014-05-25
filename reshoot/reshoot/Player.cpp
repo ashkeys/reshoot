@@ -10,7 +10,7 @@
 #include "Player.h"
 #include "Bullet.h"
 
-static DrawType s_drawType = middleChara;
+DrawType Player::s_drawType = middleChara;
 
 /* ______________________________________________________________________________________public method */
 
@@ -53,10 +53,12 @@ Player::~Player()
  * @param [in] bullets 所持する弾丸
  *
  */
-void Player::Init(const int id, const double x, const double y, char* const fileName, Bullet* bullets)
+void Player::Init(const double x, const double y, const char* fileName, Bullet* bullets)
 {
-	Base::Init(id, x, y, fileName, s_drawType);
+	Base::Init(x, y, fileName, s_drawType);
 
+	this->x = x;
+	this->y = y;
 	myBullets = bullets;
 	bulletIndex = 0;
 }
@@ -79,20 +81,20 @@ void Player::Input(const int buf)
 void Player::Update()
 {
 	Move();
-	// SendParent(); のような関数で親にUpdate後の必要な情報を送る
-	// x, yなどはprotectedで継承しているので、直接書き換えてもいいかも？
+
+	SendDataToParent();
 }
 
 /**
  * @brief 描画
  *
  */
-void Player::Draw()
-{
-	drawX = static_cast<int>( x - (imageSizeX / 2) );
-	drawY = static_cast<int>( y - (imageSizeY / 2) );
-	DrawGraph(drawX, drawY, hImage, true);
-}
+//void Player::Draw()
+//{
+//	drawX = static_cast<int>( x - (imageSizeX / 2) );
+//	drawY = static_cast<int>( y - (imageSizeY / 2) );
+//	DrawGraph(drawX, drawY, hImage, true);
+//}
 
 /* ______________________________________________________________________________________private method */
 
@@ -165,6 +167,16 @@ void Player::Move()
  */
 void Player::Collide()
 {
+}
+
+/**
+ * @brief 親クラスに更新後のデータを送る
+ *
+ */
+void Player::SendDataToParent()
+{
+	Base::X(x);
+	Base::Y(y);
 }
 
 /* ______________________________________________________________________Other method */

@@ -6,7 +6,10 @@
 
 // include
 #include "DxLib.h"
+#include "common.h"
 #include "Bullet.h"
+
+DrawType Bullet::s_drawType = middleCharaObj;
 
 /* ______________________________________________________________________________________public method */
 
@@ -14,10 +17,9 @@
  * @brief コンストラクタ
  *
  */
-Bullet::Bullet() : x(0), y(100), aliveFlg(false)
+Bullet::Bullet()
 {
-	hImage = LoadGraph("../data/image/bullet.png");
-	GetGraphSize(hImage, &imageSizeX, &imageSizeY);
+
 }
 
 /**
@@ -26,7 +28,25 @@ Bullet::Bullet() : x(0), y(100), aliveFlg(false)
  */
 Bullet::~Bullet()
 {
-	aliveFlg = false;
+	activeFlg = false;
+}
+
+/**
+ * @brief 初期化
+ *
+ * @param [in] id 識別番号
+ * @param [in] x 初期x座標
+ * @param [in] y 初期y座標
+ * @param [in] fileName 画像ファイル名
+ *
+ */
+void Bullet::Init(const double x, const double y, const char* fileName)
+{
+	Base::Init(x, y, fileName, s_drawType);
+
+	this->x = x;
+	this->y = y;
+	activeFlg = false;
 }
 
 /**
@@ -45,19 +65,7 @@ void Bullet::Update()
 {
 	Move();
 	Collide();
-}
-
-/**
- * @brief 描画
- *
- */
-void Bullet::Draw()
-{
-	if(aliveFlg == true){
-		drawX = static_cast<int>( x - (imageSizeX / 2) );
-		drawY = static_cast<int>( y - (imageSizeY / 2) );
-		DrawGraph(drawX, drawY, hImage, true);
-	}
+	SendDataToParent();
 }
 
 /* ______________________________________________________________________________________private method */
@@ -70,7 +78,7 @@ void Bullet::Draw()
  */
 void Bullet::Move()
 {
-	if(aliveFlg == true){
+	if(activeFlg == true){
 		x += 10;
 	}
 }
@@ -81,9 +89,19 @@ void Bullet::Move()
  */
 void Bullet::Collide()
 {
-	if(aliveFlg == true){
+	if(activeFlg == true){
 	
 	}
+}
+
+/**
+ * @brief 親クラスに更新後のデータを送る
+ *
+ */
+void Bullet::SendDataToParent()
+{
+	Base::X(x);
+	Base::Y(y);
 }
 
 /* ______________________________________________________________________Other method */
@@ -96,7 +114,7 @@ void Bullet::Collide()
  */
 void Bullet::Fire(const double x, const double y)
 {
-	aliveFlg = true;
+	activeFlg = true;
 	this->x = x;
 	this->y = y;
 }
@@ -107,6 +125,6 @@ void Bullet::Fire(const double x, const double y)
  */
 void Bullet::Reset()
 {
-	aliveFlg = false;
+	activeFlg = false;
 	x = 0;
 }

@@ -5,6 +5,7 @@
  * @file Character.h
  * @brief Characterクラスヘッダー
  *
+ * @note 凍結中
  */
 
 // include
@@ -28,7 +29,7 @@ public:
 	Character();
 	~Character();
 
-	void Init(const int id, const double x, const double y, char* fileName, DrawType type);
+	void Init(const double x, const double y, const char* fileName, DrawType type);
 	void Input(const int buf);
 	void Update();
 	//void Draw();

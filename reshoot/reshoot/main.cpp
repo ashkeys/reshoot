@@ -28,6 +28,8 @@ void Output();
 void Draw();
 void PlaySound();
 
+void Final();
+
 // グローバル変数
 
 /* @note DxLib_Init()実行前に描画オブジェクトなどを作らないこと（ポインタはOK） */
@@ -58,11 +60,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		ScreenFlip();
 	}
 
-	delete g_player;
-	g_player = NULL;
-	delete [] g_pBullets;
-	g_pBullets = NULL;
-	DrawMgr::Destroy();
+	Final();
 
 	DxLib_End();
 	return 0;
@@ -79,11 +77,17 @@ void Init()
 	g_drawMgr = DrawMgr::Instance();
 	DrawObj::SetDrawMgr(g_drawMgr);
 
-	g_pBullets = new Bullet[P_BULLET_MAX];
 	//g_pWeapon = new Weapon[P_WEAPON_NUM];
 	g_player = new Player();
+	g_pBullets = new Bullet[P_BULLET_MAX];
 
-	g_player->Init(0, 320, 240, "../data/image/player.png", g_pBullets);
+	const char* playerFileName = "../data/image/player.png";
+	g_player->Init(320, 240, playerFileName, g_pBullets);
+
+	const char* bulletFileName = "../data/image/bullet.png";
+	for(int i = 0; i < P_BULLET_MAX; ++i){
+		g_pBullets[i].Init(0, 0, bulletFileName);
+	}
 }
 
 /**
@@ -145,4 +149,19 @@ void Draw()
  */
 void PlaySound()
 {
+}
+
+/**
+ * @brief 全体の終了処理
+ *
+ */
+void Final()
+{
+	delete g_player;
+	g_player = NULL;
+
+	delete [] g_pBullets;
+	g_pBullets = NULL;
+
+	DrawMgr::Destroy();
 }

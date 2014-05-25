@@ -10,7 +10,8 @@
 #include "DrawObj.h"
 #include "DrawMgr.h"
 
-static DrawMgr* s_drawMgr;
+int DrawObj::currentId = 0;
+DrawMgr* DrawObj::s_drawMgr = NULL;
 
 /* ______________________________________________________________________________________public method */
 
@@ -29,8 +30,9 @@ void DrawObj::SetDrawMgr(DrawMgr* mgr)
  * @brief コンストラクタ
  *
  */
-DrawObj::DrawObj() : id(-1), scale(1.0), angle(0.0)
+DrawObj::DrawObj() : id(currentId), scale(1.0), angle(0.0)
 {
+	++currentId;
 }
 
 /**
@@ -56,7 +58,7 @@ void DrawObj::Draw()
  * @param [in] type 描画タイプ
  *
  */
-void DrawObj::Init(const int id, const double x, const double y, char* fileName, DrawType type)
+void DrawObj::Init(const double x, const double y, const char* fileName, DrawType type)
 {
 	drawType = type;
 
@@ -67,7 +69,6 @@ void DrawObj::Init(const int id, const double x, const double y, char* fileName,
 	hImage = LoadGraph(fileName);
 	GetGraphSize(hImage, &imageSizeX, &imageSizeY);
 
-	this->id = id;
 	this->x = x;
 	this->y = y;
 	activeFlg = true;
@@ -80,5 +81,5 @@ void DrawObj::Init(const int id, const double x, const double y, char* fileName,
 void DrawObj::setDrawType(DrawType type)
 {
 	drawType = type;
-	s_drawMgr->Replace(id, type);
+	s_drawMgr->ChangeType(id, type);
 }

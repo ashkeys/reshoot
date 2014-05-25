@@ -2,6 +2,7 @@
  * @file Character.cpp
  * @brief Characterクラス実装ファイル
  *
+ * @note 凍結中
  */
 
 // include
@@ -35,9 +36,9 @@ Character::~Character()
  * @param [in] type 描画タイプ
  *
  */
-void Character::Init(const int id, const double x, const double y, char* fileName, DrawType type)
+void Character::Init(const double x, const double y, const char* fileName, DrawType type)
 {
-	Base::Init(id, x, y, fileName, type);
+	Base::Init(x, y, fileName, type);
 }
 
 /**

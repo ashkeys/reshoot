@@ -13,6 +13,7 @@
 
 // 前方宣言
 class Bullet;
+enum DrawType;
 
 /**
  * @brief Playerクラス
@@ -20,18 +21,17 @@ class Bullet;
  * 操作するキャラクターに関するクラス
  *
  */
-class Player : public Character{
-	typedef Character Base;	///< 基底クラスをtypedef
+class Player : public DrawObj{
+	typedef DrawObj Base;	///< 基底クラスをtypedef
 
 public:
 	Player();
 	Player(double x, double y, char* fileName, Bullet* bullets);
 	~Player();
 
-	void Init(const int id, const double x, const double y, char* fileName, Bullet* bullets);
+	void Init(const double x, const double y, const char* fileName, Bullet* bullets);
 	void Input(const int buf);
 	void Update();
-	void Draw();
 
 	void X(const double x)	{this->x = x;}		///< setter
 	double X() const				{return this->x;}	///< getter
@@ -45,6 +45,7 @@ private:
 	// Update method
 	void Move();
 	void Collide();
+	void SendDataToParent();
 
 	// Other method
 	void Reset();
@@ -53,11 +54,7 @@ private:
 	double dx, dy;
 	//Vector2D dir;
 
-	int drawX, drawY;						/// 描画用座標
-	int hImage;									/// 描画ハンドル
-	int imageSizeX, imageSizeY;
-	double scale;
-
+	static DrawType s_drawType;
 	Bullet* myBullets;
 	int bulletIndex;
 

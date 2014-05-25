@@ -27,7 +27,7 @@ public:
 
 protected:
 	DrawObj();
-	void Init(const int id, const double x, const double y, char* fileName, DrawType type);
+	void Init(const double x, const double y, const char* fileName, DrawType type);
 	void setDrawType(DrawType type);
 
 	void X(const double x)	{this->x = x;}		///< setter
@@ -45,6 +45,9 @@ private:
 	int imageSizeX, imageSizeY;
 	double scale;
 	double angle;
+
+	static int currentId;
+	static DrawMgr* s_drawMgr;
 
 };
 
