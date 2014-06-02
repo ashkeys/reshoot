@@ -41,7 +41,6 @@ private:
 	bool activeFlg;		/// 発射～着弾の間にtrue
 
 	//Collider collider;
-	//衝突判定のサイズ決定用変数が必要。複雑な形のキャラの場合、colliderも複数必要。
 };
 
 #endif

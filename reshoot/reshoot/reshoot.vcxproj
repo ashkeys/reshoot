@@ -85,6 +85,7 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="DrawMgr.cpp" />
     <ClCompile Include="DrawObj.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Vector2D.cpp" />
@@ -97,6 +98,7 @@
     <ClInclude Include="common.h" />
     <ClInclude Include="DrawMgr.h" />
     <ClInclude Include="DrawObj.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="SoundMgr.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Vector2D.h" />

@@ -1,33 +1,32 @@
-#ifndef __PLAYER_H__
-#define __PLAYER_H__
+#ifndef __ENEMY_H__
+#define __ENEMY_H__
 
 /**
- * @file Player.h
- * @brief Playerクラスヘッダー
+ * @file Enemy.h
+ * @brief Enemyクラスヘッダー
  *
  */
 
 // include
 #include "DrawObj.h"
-#include "Character.h"
 
 // 前方宣言
 class Bullet;
 enum DrawType;
 
 /**
- * @brief Playerクラス
+ * @brief Enemyクラス
  *
- * 操作するキャラクターに関するクラス
+ * 敵キャラクターに関するクラス
  *
  */
-class Player : public DrawObj{
+class Enemy : public DrawObj{
 	typedef DrawObj Base;	///< 基底クラスをtypedef
 
 public:
-	Player();
-	Player(double x, double y, char* fileName, Bullet* bullets);
-	~Player();
+	Enemy();
+	Enemy(double x, double y, char* fileName, Bullet* bullets);
+	~Enemy();
 
 	void Init(const double x, const double y, const char* fileName, Bullet* bullets);
 	void Input(const int buf);

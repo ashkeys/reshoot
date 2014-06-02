@@ -1,16 +1,16 @@
 /**
- * @file Player.cpp
- * @brief Playerクラス実装ファイル
+ * @file Enemy.cpp
+ * @brief Enemyクラス実装ファイル
  *
  */
 
 // include
 #include "DxLib.h"
 #include "common.h"
-#include "Player.h"
+#include "Enemy.h"
 #include "Bullet.h"
 
-DrawType Player::s_drawType = middleChara;
+DrawType Enemy::s_drawType = middleChara;
 
 /* ______________________________________________________________________________________public method */
 
@@ -18,7 +18,7 @@ DrawType Player::s_drawType = middleChara;
  * @brief コンストラクタ
  *
  */
-Player::Player()
+Enemy::Enemy()
 {
 }
 
@@ -31,7 +31,7 @@ Player::Player()
  * @param [in] bullets	プレイヤーの所持する弾丸
  *
  */
-Player::Player(double x, double y, char* fileName, Bullet* bullets)
+Enemy::Enemy(double x, double y, char* fileName, Bullet* bullets)
 {
 }
 
@@ -39,7 +39,7 @@ Player::Player(double x, double y, char* fileName, Bullet* bullets)
  * @brief デストラクタ
  *
  */
-Player::~Player()
+Enemy::~Enemy()
 {
 }
 
@@ -53,7 +53,7 @@ Player::~Player()
  * @param [in] bullets 所持する弾丸
  *
  */
-void Player::Init(const double x, const double y, const char* fileName, Bullet* bullets)
+void Enemy::Init(const double x, const double y, const char* fileName, Bullet* bullets)
 {
 	Base::Init(x, y, fileName, s_drawType);
 
@@ -69,7 +69,7 @@ void Player::Init(const double x, const double y, const char* fileName, Bullet* 
  * @param [in] buf 入力情報バッファ
  *
  */
-void Player::Input(const int buf)
+void Enemy::Input(const int buf)
 {
 	CheckKey(buf);
 }
@@ -78,23 +78,12 @@ void Player::Input(const int buf)
  * @brief 更新
  *
  */
-void Player::Update()
+void Enemy::Update()
 {
 	Move();
 
 	SendDataToParent();
 }
-
-/**
- * @brief 描画
- *
- */
-//void Player::Draw()
-//{
-//	drawX = static_cast<int>( x - (imageSizeX / 2) );
-//	drawY = static_cast<int>( y - (imageSizeY / 2) );
-//	DrawGraph(drawX, drawY, hImage, true);
-//}
 
 /* ______________________________________________________________________________________private method */
 
@@ -105,7 +94,7 @@ void Player::Update()
  * @param [in] buf 入力情報バッファ
  *
  */
-void Player::CheckKey(const int buf)
+void Enemy::CheckKey(const int buf)
 {
 	if(buf & PAD_INPUT_DOWN){
 		dy += 0.1;		
@@ -148,7 +137,7 @@ void Player::CheckKey(const int buf)
  * @brief 移動
  *
  */
-void Player::Move()
+void Enemy::Move()
 {
 	if( ( (x + dx) < 0 ) || ( (x + dx) > 640 ) ){
 		dx = 0;
@@ -165,7 +154,7 @@ void Player::Move()
  * @brief 衝突判定（使い道未定）
  *
  */
-void Player::Collide()
+void Enemy::Collide()
 {
 }
 
@@ -173,7 +162,7 @@ void Player::Collide()
  * @brief 親クラスに更新後のデータを送る
  *
  */
-void Player::SendDataToParent()
+void Enemy::SendDataToParent()
 {
 	Base::X(x);
 	Base::Y(y);
@@ -185,6 +174,6 @@ void Player::SendDataToParent()
  * @brief 状態リセット
  *
  */
-void Player::Reset()
+void Enemy::Reset()
 {
 }

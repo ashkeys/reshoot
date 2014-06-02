@@ -17,6 +17,7 @@
 #include "DrawMgr.h"
 #include "Player.h"
 #include "Bullet.h"
+#include "Enemy.h"
 
 // 関数プロトタイプ宣言
 void Init();
@@ -33,9 +34,11 @@ void Final();
 // グローバル変数
 
 /* @note DxLib_Init()実行前に描画オブジェクトなどを作らないこと（ポインタはOK） */
-static DrawMgr* g_drawMgr;
-static Player* g_player;
-static Bullet* g_pBullets;
+static DrawMgr* g_pDrawMgr;
+static Player* g_pPlayer;
+static Enemy* g_pEnemy;
+static Bullet* g_pPlayerBullets;
+static Bullet* g_pEnemyBullets[ENEMY_MAX];
 
 /**
  * @brief Win32アプリケーションエントリポイント
@@ -74,20 +77,38 @@ void Init()
 {
 	// 描画管理クラスの使用準備
 	DrawMgr::Create();
-	g_drawMgr = DrawMgr::Instance();
-	DrawObj::SetDrawMgr(g_drawMgr);
+	g_pDrawMgr = DrawMgr::Instance();
+	DrawObj::SetDrawMgr(g_pDrawMgr);
 
+	// 各オブジェクトの初期化
 	//g_pWeapon = new Weapon[P_WEAPON_NUM];
-	g_player = new Player();
-	g_pBullets = new Bullet[P_BULLET_MAX];
-
-	const char* playerFileName = "../data/image/player.png";
-	g_player->Init(320, 240, playerFileName, g_pBullets);
-
-	const char* bulletFileName = "../data/image/bullet.png";
-	for(int i = 0; i < P_BULLET_MAX; ++i){
-		g_pBullets[i].Init(0, 0, bulletFileName);
+	g_pPlayer = new Player();
+	g_pEnemy = new Enemy[ENEMY_MAX];
+	g_pPlayerBullets = new Bullet[PLAYER_BULLET_MAX];
+	for(int i = 0; i < ENEMY_MAX; ++i){
+		g_pEnemyBullets[i] = new Bullet[ENEMY_BULLET_MAX];		
 	}
+
+	const char* const playerFileName = "../data/image/Player.png";
+	g_pPlayer->Init(320, 240, playerFileName, g_pPlayerBullets);
+
+	const char* const enemyFileName = "../data/image/Enemy.png";
+	for(int i = 0; i < ENEMY_MAX; ++i){
+		g_pEnemy[i].Init(i * 40, i * 40, enemyFileName, g_pEnemyBullets[i]);	
+	}
+
+	const char* const playerBulletFileName = "../data/image/PlayerBullet.png";
+	for(int i = 0; i < PLAYER_BULLET_MAX; ++i){
+		g_pPlayerBullets[i].Init(0, 0, playerBulletFileName);
+	}
+
+	const char* const enemyBulletFileName = "../data/image/EnemyBullet.png";
+	for(int i = 0; i < ENEMY_MAX; ++i){
+		for(int j = 0; j < ENEMY_BULLET_MAX; ++j){
+			g_pEnemyBullets[i][j].Init(0, 0, enemyBulletFileName);
+		}
+	}
+
 }
 
 /**
@@ -99,10 +120,10 @@ void Input()
 	// キーボードとPadの入力が、padBufに格納される
 	int padBuf = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
-	g_player->Input(padBuf);
+	g_pPlayer->Input(padBuf);
 
-	for(int i = 0; i < P_BULLET_MAX; ++i){
-		g_pBullets[i].Input();
+	for(int i = 0; i < PLAYER_BULLET_MAX; ++i){
+		g_pPlayerBullets[i].Input();
 	}
 }
 
@@ -113,10 +134,10 @@ void Input()
 void Update()
 {
 	/* オブジェクトの更新 */
-	g_player->Update();
+	g_pPlayer->Update();
 
-	for(int i = 0; i < P_BULLET_MAX; ++i){
-		g_pBullets[i].Update();
+	for(int i = 0; i < PLAYER_BULLET_MAX; ++i){
+		g_pPlayerBullets[i].Update();
 	}
 }
 
@@ -133,12 +154,12 @@ void Output()
 void Draw()
 {
 	/* オブジェクトの描画 */
-	g_drawMgr->Draw();
+	g_pDrawMgr->Draw();
 
 	// デバッグ用に残しておく
-	//g_player->Draw();
-	//for(int i = 0; i < P_BULLET_MAX; ++i){
-	//	g_pBullets[i].Draw();
+	//g_pPlayer->Draw();
+	//for(int i = 0; i < PLAYER_BULLET_MAX; ++i){
+	//	g_pPlayerBullets[i].Draw();
 	//}
 }
 
@@ -156,11 +177,18 @@ void PlaySound()
  */
 void Final()
 {
-	delete g_player;
-	g_player = NULL;
+	delete g_pPlayer;
+	g_pPlayer = NULL;
 
-	delete [] g_pBullets;
-	g_pBullets = NULL;
+	delete[] g_pEnemy;
+	g_pEnemy = NULL;
+
+	delete[] g_pPlayerBullets;
+	g_pPlayerBullets = NULL;
+
+	for(int i = 0; i < ENEMY_MAX; ++i){
+		delete[] g_pEnemyBullets[i];
+	}
 
 	DrawMgr::Destroy();
 }
