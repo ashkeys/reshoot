@@ -10,9 +10,9 @@
  */
 
 // 定数
-const int ENEMY_MAX = 16;					///< エネミーの出現数MAX
 const int PLAYER_BULLET_MAX = 64;	///< プレイヤーの弾数MAX
-const int ENEMY_BULLET_MAX = 64;	///< エネミーの弾数MAX
+const int ENEMY_MAX = 16;					///< エネミーの出現数MAX
+const int ENEMY_BULLET_MAX = 32;	///< エネミーの弾数MAX
 
 /**
  * @brief 描画タイプ列挙型

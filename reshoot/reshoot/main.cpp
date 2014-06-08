@@ -38,7 +38,7 @@ static DrawMgr* g_pDrawMgr;
 static Player* g_pPlayer;
 static Enemy* g_pEnemy;
 static Bullet* g_pPlayerBullets;
-static Bullet* g_pEnemyBullets[ENEMY_MAX];
+static Bullet** g_pEnemyBullets;
 
 /**
  * @brief Win32アプリケーションエントリポイント
@@ -80,15 +80,17 @@ void Init()
 	g_pDrawMgr = DrawMgr::Instance();
 	DrawObj::SetDrawMgr(g_pDrawMgr);
 
-	// 各オブジェクトの初期化
+	// 各オブジェクトのメモリ確保
 	//g_pWeapon = new Weapon[P_WEAPON_NUM];
 	g_pPlayer = new Player();
 	g_pEnemy = new Enemy[ENEMY_MAX];
 	g_pPlayerBullets = new Bullet[PLAYER_BULLET_MAX];
+	g_pEnemyBullets = new Bullet*[ENEMY_MAX];
 	for(int i = 0; i < ENEMY_MAX; ++i){
-		g_pEnemyBullets[i] = new Bullet[ENEMY_BULLET_MAX];		
+		g_pEnemyBullets[i] = new Bullet[ENEMY_BULLET_MAX];
 	}
 
+	// 各オブジェクトの初期化
 	const char* const playerFileName = "../data/image/Player.png";
 	g_pPlayer->Init(320, 240, playerFileName, g_pPlayerBullets);
 
@@ -108,7 +110,6 @@ void Init()
 			g_pEnemyBullets[i][j].Init(0, 0, enemyBulletFileName);
 		}
 	}
-
 }
 
 /**
@@ -188,7 +189,10 @@ void Final()
 
 	for(int i = 0; i < ENEMY_MAX; ++i){
 		delete[] g_pEnemyBullets[i];
+		g_pEnemyBullets[i] = NULL;
 	}
+	delete[] g_pEnemyBullets;
+	g_pEnemyBullets = NULL;
 
 	DrawMgr::Destroy();
 }
