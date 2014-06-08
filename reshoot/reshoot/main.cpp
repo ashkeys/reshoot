@@ -18,6 +18,7 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "Enemy.h"
+#include "FpsMgr.h"
 
 // 関数プロトタイプ宣言
 void Init();
@@ -50,17 +51,23 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	DxLib_Init();
 	SetDrawScreen(DX_SCREEN_BACK);
 
+	FpsMgr fpsMgr;
+
 	Init();
 
 	// メインループ
 	while( !ProcessMessage() && !( CheckHitKey(KEY_INPUT_ESCAPE) ) ){
 		ClearDrawScreen();
 
+		fpsMgr.Update();
+		fpsMgr.Draw();
+
 		Input();
 		Update();
 		Output();
 
 		ScreenFlip();
+		fpsMgr.Wait();
 	}
 
 	Final();

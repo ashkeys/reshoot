@@ -99,6 +99,7 @@
     <ClInclude Include="DrawMgr.h" />
     <ClInclude Include="DrawObj.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="FpsMgr.h" />
     <ClInclude Include="SoundMgr.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Vector2D.h" />
