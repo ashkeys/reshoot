@@ -20,42 +20,48 @@
  *
  */
 class FpsMgr{
-	int mStartTime;         //測定開始時刻
-	int mCount;             //カウンタ
-	float mFps;             //fps
-	static const int N = 60;//平均を取るサンプル数
-	static const int FPS = 60;	//設定したFPS
+	int startTime;							// 測定開始時刻
+	int count;									// カウンタ
+	double fps;									// fps
+	static const int FPS = 60;	// 設定したFPS
 
 public:
 	FpsMgr(){
-		mStartTime = 0;
-		mCount = 0;
-		mFps = 0;
+		startTime = 0;
+		count = 0;
+		fps = 0;
 	}
 
 	bool Update(){
-		if( mCount == 0 ){ //1フレーム目なら時刻を記憶
-			mStartTime = GetNowCount();
+		// 1フレーム目なら時刻を記憶
+		if( count == 0 ){
+			startTime = GetNowCount();
 		}
-		if( mCount == N ){ //60フレーム目なら平均を計算する
+
+		// フレームが設定したfpsに到達したら平均を計算する
+		else if( count == FPS - 1 ){
 			int t = GetNowCount();
-			mFps = 1000.f/((t-mStartTime)/(float)N);
-			mCount = 0;
-			mStartTime = t;
+			fps = 1000 / ( (t - startTime) / static_cast<double>(FPS) );
+			count = 0;
+			startTime = t;
+
+			return true;
 		}
-		mCount++;
+		
+		++count;
 		return true;
 	}
 
 	void Draw(){
-		DrawFormatString(200, 0, GetColor(255,255,255), "FPS : %.1f", mFps);
+		DrawFormatString(200, 0, GetColor(255,255,255), "FPS : %.2f", fps);
 	}
 
 	void Wait(){
-		int tookTime = GetNowCount() - mStartTime;	//かかった時間
-		int waitTime = mCount*1000/FPS - tookTime;	//待つべき時間
+		int takenTime = GetNowCount() - startTime;			// かかった時間
+		int waitTime = ( (count * 1000) / FPS) - takenTime;	// 待つべき時間
+		
 		if( waitTime > 0 ){
-			Sleep(waitTime);	//待機
+			Sleep(waitTime);	// 待機
 		}
 	}
 };
