@@ -59,6 +59,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	while( !ProcessMessage() && !( CheckHitKey(KEY_INPUT_ESCAPE) ) ){
 		ClearDrawScreen();
 
+		fpsMgr.Wait();
 		fpsMgr.Update();
 		fpsMgr.Draw();
 
@@ -67,7 +68,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		Output();
 
 		ScreenFlip();
-		fpsMgr.Wait();
 	}
 
 	Final();
